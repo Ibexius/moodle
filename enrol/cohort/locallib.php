@@ -70,7 +70,7 @@ class enrol_cohort_handler {
             unset($instance->roleexists);
             // No problem if already enrolled.
             $plugin->enrol_user($instance, $event->relateduserid, $instance->roleid, 0, 0, ENROL_USER_ACTIVE);
-
+			enrol_email_notify($event->relateduserid,$instance); //MARIO**********************************************************
             // Sync groups.
             if ($instance->customint2) {
                 if (!groups_is_member($instance->customint2, $event->relateduserid)) {

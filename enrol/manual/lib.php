@@ -608,6 +608,7 @@ class enrol_manual_plugin extends enrol_plugin {
         $members = $DB->get_fieldset_sql($sql, $params);
         foreach ($members as $userid) {
             $this->enrol_user($instance, $userid, $roleid, $timestart, $timeend, $status, $recovergrades);
+			enrol_email_notify($userid, $instance); //MARIO
         }
     }
 }

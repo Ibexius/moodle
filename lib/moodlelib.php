@@ -5699,6 +5699,39 @@ function email_to_user($user, $from, $subject, $messagetext, $messagehtml = '', 
     }
 }
 
+//MARIO
+function enrol_email_notify($userid, $instance) {
+global $DB;
+		global $CFG;
+
+		// if(empty($instance->customint3)){
+			// return;
+		// }
+
+		$course = $DB->get_record('course', array('id' => $instance->courseid), '*', MUST_EXIST);
+		$user = $DB->get_record('user', array('id' => $userid), '*', MUST_EXIST);
+
+		$courseName = $course->fullname;
+		
+		$username = $user->firstname;
+		
+		$support_user = core_user::get_support_user();
+		
+		$siteUrl = new moodle_url("/");
+		$courseUrl = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $course->id));
+		$anchor = html_writer::link($courseUrl, $courseName);
+		$webanchor = html_writer::link($siteUrl, "LMS");
+		
+		$subject = $courseName . " enrolment";
+		$messagetext = "Dear ". $username . ", <br><br>You have been enroled to " . $courseName . ". <br>To access the course, log in at <a href='".$siteUrl."'> " . $siteUrl . "</a> or follow this link: " . $anchor . "<br><br>This notification is sent automatically by the ". $webanchor .". Do not respond to this email.";
+
+		$messagehtml = "Yes";
+		
+		return email_to_user($user, $support_user, $subject, '',$messagetext);
+	}
+
+
+
 /**
  * Generate a signoff for emails based on support settings
  *

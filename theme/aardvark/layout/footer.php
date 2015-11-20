@@ -19,7 +19,7 @@
  * @package   theme_aardvark
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- 
+
 $hascopyright = (empty($PAGE->theme->settings->copyright)) ? false : $PAGE->theme->settings->copyright;
 $hasceop = (!empty($PAGE->theme->settings->ceop));
 $hasdisclaimer = (!empty($PAGE->theme->settings->disclaimer));
@@ -106,10 +106,9 @@ $haswikipedia = (!empty($PAGE->theme->settings->wikipedia));
 	<p>
 	
 	<?php  
- //echo html_writer::link('http://moodle.org/plugins/view.php?plugin=theme_aardvark', get_string('credit', 'theme_aardvark'));
-// echo ' | ';
-// echo html_writer::link('http://moodle.org', 'moodle.org');
-	?> 
+ echo html_writer::link('http://moodle.org/plugins/view.php?plugin=theme_aardvark', get_string('credit', 'theme_aardvark'));
+ echo ' | ';
+ echo html_writer::link('http://moodle.org', 'moodle.org');?> 
     	</p>
     	
     
