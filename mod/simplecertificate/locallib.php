@@ -1062,40 +1062,40 @@ class simplecertificate {
             $this->print_qrcode($pdf, $issuecert->code);
         //}
         
-        if (!empty($this->get_instance()->enablesecondpage)) {
-            $pdf->AddPage();
-            if (!empty($this->get_instance()->secondimage)) {
-                // Prepare file record object
-                $fileinfo = self::get_certificate_secondimage_fileinfo($this->context->id);
-                // Get file
-                $secondimagefile = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], 
-                                                $fileinfo['itemid'], $fileinfo['filepath'], $this->get_instance()->secondimage);
+        // if (!empty($this->get_instance()->enablesecondpage)) {
+            // $pdf->AddPage();
+            // if (!empty($this->get_instance()->secondimage)) {
+                // // Prepare file record object
+                // $fileinfo = self::get_certificate_secondimage_fileinfo($this->context->id);
+                // // Get file
+                // $secondimagefile = $fs->get_file($fileinfo['contextid'], $fileinfo['component'], $fileinfo['filearea'], 
+                                                // $fileinfo['itemid'], $fileinfo['filepath'], $this->get_instance()->secondimage);
                 
-                // Read contents
-                if (!empty($secondimagefile)) {
-                    $temp_filename = $secondimagefile->copy_content_to_temp(self::CERTIFICATE_COMPONENT_NAME, 'second_image_');
-                    $pdf->Image($temp_filename, 0, 0, $this->get_instance()->width, $this->get_instance()->height);
-                    @unlink($temp_filename);
-                } else {
-                    print_error(get_string('filenotfound', 'simplecertificate', $this->get_instance()->secondimage));
-                }
-            }
-            if (!empty($this->get_instance()->secondpagetext)) {
-                $pdf->SetXY($this->get_instance()->secondpagex, $this->get_instance()->secondpagey);
-                $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $this->get_instance()->secondpagetext), 0, 
-                                    0, 0, true, 'C');
-            }
-        }
+                // // Read contents
+                // if (!empty($secondimagefile)) {
+                    // $temp_filename = $secondimagefile->copy_content_to_temp(self::CERTIFICATE_COMPONENT_NAME, 'second_image_');
+                    // $pdf->Image($temp_filename, 0, 0, $this->get_instance()->width, $this->get_instance()->height);
+                    // @unlink($temp_filename);
+                // } else {
+                    // print_error(get_string('filenotfound', 'simplecertificate', $this->get_instance()->secondimage));
+                // }
+            // }
+            // if (!empty($this->get_instance()->secondpagetext)) {
+                // $pdf->SetXY($this->get_instance()->secondpagex, $this->get_instance()->secondpagey);
+                // $pdf->writeHTMLCell(0, 0, '', '', $this->get_certificate_text($issuecert, $this->get_instance()->secondpagetext), 0, 
+                                    // 0, 0, true, 'C');
+            // }
+        // }
         
-        if (!empty($this->get_instance()->printqrcode) && empty($this->get_instance()->qrcodefirstpage)) {
-            //Add certificade code using QRcode, in a new page (to print in the back)
-            if (empty($this->get_instance()->enablesecondpage)) {
-                //If secondpage is disabled, create one
-                $pdf->AddPage();
-            }
-            $this->print_qrcode($pdf, $issuecert->code);
+        // if (!empty($this->get_instance()->printqrcode) && empty($this->get_instance()->qrcodefirstpage)) {
+            // //Add certificade code using QRcode, in a new page (to print in the back)
+            // if (empty($this->get_instance()->enablesecondpage)) {
+                // //If secondpage is disabled, create one
+                // $pdf->AddPage();
+            // }
+            // $this->print_qrcode($pdf, $issuecert->code);
         
-            }
+            // }
         return $pdf;
     }
 
